@@ -14,28 +14,31 @@
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="index.php" style="color:Black;">Home <span class="sr-only">(current)</span></a>
+                <h4><a class="nav-link" href="index.php" style="color:Black;">Scouting 2018</a></h4>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="aboutUs.php" style="color:Black;">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" style="color:Black;">FIRST</a>
-            </li>
-			<li class="nav-item">
-                <a class="nav-link" href="#" style="color:Black;">Tutorials</a>
-            </li>
-			<li class="nav-item">
-                <a class="nav-link" href="#" style="color:Black;">Gallery</a>
-            </li>
-			<li class="nav-item">
-                <a class="nav-link" href="#" style="color:Black;">Calendar</a>
-            </li>
-			<li class="nav-item">
-                <a class="nav-link" href="#" style="color:Black;">Resources</a>
-            </li>
-
         </ul>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-left">
+				<li class = "dropdown">
+					<a class="dropdown-toggle" style="color:Black;">Forms</a>
+	                    <ul class="dropdown-menu">
+	                        <li><a class="nav-link" href="index.php" style="color:Black;">Match Form</a></li>
+							<li><a class="nav-link" href="index.php" style="color:Black;">HS Input</a></li>
+							<li><a class="nav-link" href="index.php" style="color:Black;">PS Form</a></li>
+							<li><a class="nav-link" href="index.php" style="color:Black;">Picture Upload</a></li>
+							<li><a class="nav-link" href="index.php" style="color:Black;">Database Op</a></li>		
+	                    </ul>
+				</li>
+				<li><a class="nav-link" href="index.php" style="color:Black;">User Registration</a></li>
+				<li><a class="nav-link" href="index.php" style="color:Black;">Team Data</a></li>
+				<li><a class="nav-link" href="index.php" style="color:Black;">Match Data</a></li>
+				<li><a class="nav-link" href="index.php" style="color:Black;">Ranking</a></li>	
+				<li><a class="nav-link" href="index.php" style="color:Black;">Match Output</a></li>
+				<li><a class="nav-link" href="index.php" style="color:Black;">HS Output</a></li>
+				<li><a class="nav-link" href="index.php" style="color:Black;">Team Filter</a></li>	
+
+			</ul>
+			</div>
 		
 		<?php
 			if(isset($_SESSION["userKey"])){
@@ -53,7 +56,7 @@
 			else{
 				echo('<ul class="nav navbar-nav navbar-right">
 						<li class = "nav-item">
-							<a class="nav-link" href = "login.php">Login</a>
+							<a class="nav-link" href = "login.php" >Login</a>
 						</li>
 					</ul>');
 			}

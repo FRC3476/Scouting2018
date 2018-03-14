@@ -10,7 +10,7 @@ include('navBar.php');
             color: #fff;
         }
         .intro-1 {
-            background: url("Background.jpg")no-repeat center center;
+            background: url("images/perry.png")no-repeat center center;
             background-size: cover;
         }
         .navbar .btn-group .dropdown-menu a:hover {
@@ -30,10 +30,10 @@ include('navBar.php');
                 <div class="container">
                     <ul>
                         <li>
-                            <h1 class="h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s">Team 3476: Code Orange</h1></li>
+                            <h1 class="h1-responsive font-bold wow fadeInDown" data-wow-delay="0.2s">Welcome to Scouting!</h1></li>
 
                         <li>
-                            <a target="_blank" href="https://mdbootstrap.com/material-design-for-bootstrap/" class="btn btn-default btn-lg wow fadeInRight" data-wow-delay="0.2s" rel="nofollow">Learn about our Team</a>
+                            <a target="_blank" href="userRegistration.php" class="btn btn-warning wow fadeInRight" data-wow-delay="0.2s" rel="nofollow">New Scout? Click Here!</a>
                         </li>
                     </ul>
                 </div>
@@ -52,72 +52,22 @@ include('navBar.php');
 
             <div class="row pt-3">
 
-                <!--First columnn-->
-                <div class="col-lg-4 mb-r">
-
-                    <!--Card-->
-                    <div class="card wow fadeIn">
-
-                        <!--Card image-->
-                        <img class="img-fluid" src="images/first.jpg" alt="Card image cap">
-
-                        <!--Card content-->
-                        <div class="card card-cascade">
-                            <!--Title-->
-                            <h4 class="card-title text-center"><b>FIRST</b></h4>
-                            <hr>
-                            <!--Text-->
-							<a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-
-                    </div>
-                    <!--/.Card-->
+                <div class="col-lg-3 mb-r">
+					<a href="#" class="btn btn-warning">Match Form</a>
                 </div>
-                <!--First columnn-->
 
-                <!--Second columnn-->
-                <div class="col-lg-4 mb-r">
-                    <!--Card-->
-                    <div class="card wow fadeIn" data-wow-delay="0.2s">
-
-                        <!--Card image-->
-                        <img class="img-fluid" src="images/steamworks.jpg" alt="Card image cap">
-
-                        <!--Card content-->
-                        <div class="card card-dark">
-                            <!--Title-->
-                            <h4 class="card-title text-center"><b>FIRST Steamworks</b></h4>
-                            <hr>
-                            <!--Text-->
-							<a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-
-                    </div>
-                    <!--/.Card-->
+                <div class="col-lg-3 mb-r">
+					<a href="#" class="btn btn-warning">Pit Scout Form</a>
                 </div>
-                <!--Second columnn-->
 
-                <!--Third columnn-->
-                <div class="col-lg-4 mb-r">
-                    <!--Card-->
-                    <div class="card wow fadeIn" data-wow-delay="0.4s">
-
-                        <!--Card image-->
-                        <img class="img-fluid" src="images/rincon.jpg" alt="Card image cap">
-
-                        <!--Card content-->
-                        <div class="card card-dark">
-                            <!--Title-->
-                            <h4 class="card-title text-center"><b>Rincon</b></h4>
-                            <hr>
-                            <!--Text-->
-							<a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-
-                    </div>
-                    <!--/.Card-->
+                <div class="col-lg-3 mb-r">
+					<a href="#" class="btn btn-warning">Head Scout Form</a>
                 </div>
-                <!--Third columnn-->
+				
+				<div class="col-lg-3 mb-r">
+					<a href="#" class="btn btn-warning">OC Regional Schedule</a>
+                </div>
+
             </div>
 
         </section>
