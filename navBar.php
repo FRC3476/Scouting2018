@@ -22,7 +22,7 @@
 				<li class = "dropdown">
 					<a class="dropdown-toggle" style="color:Black;">Forms</a>
 	                    <ul class="dropdown-menu">
-	                        <li><a class="nav-link" href="index.php" style="color:Black;">Match Form</a></li>
+	                        <li><a class="nav-link" href="matchInput.php" style="color:Black;">Match Form</a></li>
 							<li><a class="nav-link" href="index.php" style="color:Black;">HS Input</a></li>
 							<li><a class="nav-link" href="index.php" style="color:Black;">PS Form</a></li>
 							<li><a class="nav-link" href="index.php" style="color:Black;">Picture Upload</a></li>

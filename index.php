@@ -53,7 +53,7 @@ include('navBar.php');
             <div class="row pt-3">
 
                 <div class="col-lg-3 mb-r">
-					<a href="#" class="btn btn-warning">Match Form</a>
+					<a href="matchInput.php" class="btn btn-warning">Match Form</a>
                 </div>
 
                 <div class="col-lg-3 mb-r">

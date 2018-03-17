@@ -10,19 +10,15 @@ if( isset( $_POST['matchNum'] ) ) {
 	 $allianceColor = filter_var($_POST['allianceColor'], FILTER_SANITIZE_STRING); 
 	 $autoPath = filter_var($_POST['autoPath'], FILTER_SANITIZE_STRING);  
 	 $crossLineA = filter_var($_POST['crossLineA'], FILTER_SANITIZE_STRING);  
-	 $gearPositionA = filter_var($_POST['gearPositionA'], FILTER_SANITIZE_STRING);  
-	 $gearNumberA = filter_var($_POST['gearNumberA'], FILTER_SANITIZE_STRING);  
-	 $hopperUsedA = filter_var($_POST['hopperUsedA'], FILTER_SANITIZE_STRING);  
-	 $rankingPointA = filter_var($_POST['rankingPointA'], FILTER_SANITIZE_STRING);  
-	 $gearNumberT = filter_var($_POST['gearNumberT'], FILTER_SANITIZE_STRING);  
-	 $gearPickupT = filter_var($_POST['gearPickupT'], FILTER_SANITIZE_STRING);  
-	 $fuelGoalT = filter_var($_POST['fuelGoalT'], FILTER_SANITIZE_STRING);  
-	 $fuelPickupT = filter_var($_POST['fuelPickupT'], FILTER_SANITIZE_STRING);  
-	 $fuelAccuracyT = filter_var($_POST['fuelAccuracyT'], FILTER_SANITIZE_STRING);  
-	 $fuelSpeedT = filter_var($_POST['fuelSpeedT'], FILTER_SANITIZE_STRING);  
-	 $hopperSizeT = filter_var($_POST['hopperSizeT'], FILTER_SANITIZE_STRING);  
-	 $climb = filter_var($_POST['climb'], FILTER_SANITIZE_STRING);  
-	 $climbExtent = filter_var($_POST['climbExtent'], FILTER_SANITIZE_STRING);  
+	 $ownSwitchA = filter_var($_POST['ownSwitchA'], FILTER_SANITIZE_STRING); 
+	 $ownScaleA = filter_var($_POST['ownScaleA'], FILTER_SANITIZE_STRING); 
+	 $ownSwitchT = filter_var($_POST['ownSwitchT'], FILTER_SANITIZE_STRING); 
+	 $ownScaleT = filter_var($_POST['ownScaleT'], FILTER_SANITIZE_STRING); 
+	 $oppSwitchT = filter_var($_POST['oppSwitchT'], FILTER_SANITIZE_STRING); 
+	 $exchangeT = filter_var($_POST['exchangeT'], FILTER_SANITIZE_STRING); 
+	 $climb = filter_var($_POST['climb'], FILTER_SANITIZE_STRING); 
+	 $climbTwo = filter_var($_POST['climbTwo'], FILTER_SANITIZE_STRING); 
+	 $climbThree = filter_var($_POST['climbThree'], FILTER_SANITIZE_STRING); 
 	 $issues = filter_var($_POST['issues'], FILTER_SANITIZE_STRING);  
 	 $defenseBot = filter_var($_POST['defenseBot'], FILTER_SANITIZE_STRING);  
 	 $defenseComments = filter_var($_POST['defenseComments'], FILTER_SANITIZE_STRING);  
@@ -34,19 +30,15 @@ if( isset( $_POST['matchNum'] ) ) {
 				 $allianceColor,
 				 $autoPath,
 				 $crossLineA,
-				 $gearPositionA,
-				 $gearNumberA,
-				 $hopperUsedA,
-				 $rankingPointA,
-				 $gearNumberT,
-				 $gearPickupT,
-				 $fuelGoalT,
-				 $fuelPickupT,
-				 $fuelAccuracyT,
-				 $fuelSpeedT,
-				 $hopperSizeT,
+				 $ownSwitchA,
+				 $ownScaleA,
+				 $ownSwitchT,
+				 $ownScaleT,
+				 $oppSwitchT,
+				 $exchangeT,
 				 $climb,
-				 $climbExtent,
+				 $climbTwo,
+				 $climbThree,
 				 $issues,
 				 $defenseBot,
 				 $defenseComments,
@@ -60,32 +52,80 @@ var increment = 1;
 var keyPressOk = true;
 var mode = true;
 var removeStuff = 0;
-var gearNumberA = 0;
-var gearNumberT = 0;  
+var ownSwitchA = 0;
+var ownScaleA = 0;
+var ownSwitchT = 0;
+var ownScaleT = 0;
+var oppSwitchT = 0; 
+var exchangeT = 0; 
 $( document ).ready(function() {
     $.material.init();
 });
-function incrGearsPlacedA(){
-	gearNumberA = gearNumberA + increment;
-	document.getElementById("gearNumberA").innerHTML=gearNumberA;
+function incrCubesSwitchA(){
+	ownSwitchA = ownSwitchA + increment;
+	document.getElementById("ownSwitchA").innerHTML=ownSwitchA;
 }
-function decGearsPlacedA(){
-	gearNumberA = gearNumberA - increment;
-	if (gearNumberA < 0){
-		gearNumberA = 0;
+function decCubesSwitchA(){
+	ownSwitchA = ownSwitchA - increment;
+	if (ownSwitchA < 0){
+		ownSwitchA = 0;
 	} 
-	document.getElementById("gearNumberA").innerHTML=gearNumberA; 
+	document.getElementById("ownSwitchA").innerHTML=ownSwitchA; 
 }
-function incrGearsPlacedT(){
-	gearNumberT = gearNumberT + increment;
-	document.getElementById("gearNumberT").innerHTML=gearNumberT;
+function incrCubesScaleA(){
+	ownScaleA = ownScaleA + increment;
+	document.getElementById("ownScaleA").innerHTML=ownScaleA;
 }
-function decGearsPlacedT(){
-	gearNumberT = gearNumberT - increment;
-	if (gearNumberT < 0){
-		gearNumberT = 0;
+function decCubesScaleA(){
+	ownScaleA = ownScaleA - increment;
+	if (ownScaleA < 0){
+		ownScaleA = 0;
 	} 
-	document.getElementById("gearNumberT").innerHTML=gearNumberT;
+	document.getElementById("ownScaleA").innerHTML=ownScaleA; 
+}
+function incrCubesSwitchT(){
+	ownSwitchT = ownSwitchT + increment;
+	document.getElementById("ownSwitchT").innerHTML=ownSwitchT;
+}
+function decCubesSwitchT(){
+	ownSwitchT = ownSwitchT - increment;
+	if (ownSwitchT < 0){
+		ownSwitchT = 0;
+	} 
+	document.getElementById("ownSwitchT").innerHTML=ownSwitchT; 
+}
+function incrCubesScaleT(){
+	ownScaleT = ownScaleT + increment;
+	document.getElementById("ownScaleT").innerHTML=ownScaleT;
+}
+function decCubesScaleT(){
+	ownScaleT = ownScaleT - increment;
+	if (ownScaleT < 0){
+		ownScaleT = 0;
+	} 
+	document.getElementById("ownScaleT").innerHTML=ownScaleT; 
+}
+function incrCubesOppSwitchT(){
+	oppSwitchT = oppSwitchT + increment;
+	document.getElementById("oppSwitchT").innerHTML=oppSwitchT;
+}
+function decCubesOppSwitchT(){
+	oppSwitchT = oppSwitchT - increment;
+	if (oppSwitchT < 0){
+		oppSwitchT = 0;
+	} 
+	document.getElementById("oppSwitchT").innerHTML=oppSwitchT; 
+}
+function incrCubesExchangeT(){
+	exchangeT = exchangeT + increment;
+	document.getElementById("exchangeT").innerHTML=exchangeT;
+}
+function decCubesExchangeT(){
+	exchangeT = exchangeT - increment;
+	if (exchangeT < 0){
+		exchangeT = 0;
+	} 
+	document.getElementById("exchangeT").innerHTML=exchangeT; 
 }
 $(function(){
   		$('#teleopscouting').hide();
@@ -124,74 +164,35 @@ function postwith(to){
 		var myForm = document.createElement("form");
 		myForm.method="post";
 		myForm.action = to;
-		
-		var names = [
-		 'matchNum',
-		 'teamNum',
-		 'allianceColor',
-		 'autoPath',
-		 'crossLineA',
-		 'gearPositionA',
-		 'gearNumberA',
-		 'hopperUsedA',
-		 'rankingPointA',
-		 'gearNumberT',
-		 'gearPickupT',
-		 'fuelGoalT',
-		 'fuelPickupT',
-		 'fuelAccuracyT',
-		 'fuelSpeedT',
-		 'hopperSizeT',
-		 'climb',
-		 'climbExtent',
-		 'issues',
-		 'defenseBot',
-		 'defenseComments',
-		 'matchComments'
-		
-		];
 	
-		var nums = [
-		document.getElementById('matchNum').value,
-		document.getElementById('teamNum').value,
-		document.getElementById('allianceColor').value,
-		JSON.stringify(coordinateList),
-		document.getElementById('crossLineA').checked?1:0,
-		document.getElementById('gearPositionA').value,
-		gearNumberA,
-		document.getElementById('hopperUsedA').value,
-		document.getElementById('rankingPointA').checked?1:0,
-		gearNumberT,
-		document.getElementById('gearPickupT').value,
-		document.getElementById('fuelGoalT').value,
-		document.getElementById('fuelPickupT').value,
-		document.getElementById('fuelAccuracyT').value,
-		document.getElementById('fuelSpeedT').value,
-		document.getElementById('hopperSizeT').value,
-		document.getElementById('climb').checked?1:0,
-		document.getElementById('climbExtent').value,
-		document.getElementById('issues').value,
-		document.getElementById('defenseBot').checked?1:0,
-		document.getElementById('defenseComments').value,
-		document.getElementById('matchComments').value
-		];  
-  
-		for (var i = 0; i != names.length; i++) {
-			var myInput = document.createElement("input");
-			myInput.setAttribute("name", names[i]);
-			myInput.setAttribute("value", nums[i]);
-			myForm.appendChild(myInput);
-		}
-  
-		document.body.appendChild(myForm);
-		myForm.submit();
-		document.body.removeChild(myForm);
+		var nums = {
+		'matchNum' : document.getElementById('matchNum').value,
+		'teamNum' : document.getElementById('teamNum').value,
+		'allianceColor' : document.getElementById('allianceColor').value,
+		'autoPath' : JSON.stringify(coordinateList),
+		'crossLineA' : document.getElementById('crossLineA').checked?1:0,
+		'ownSwitchA' : ownSwitchA,
+		'ownScaleA' : ownScaleA,
+		'ownSwitchT' : ownSwitchT,
+		'ownScaleT' : ownScaleT,
+		'oppSwitchT' : oppSwitchT,
+		'exchangeT' : exchangeT,
+		'climb' : document.getElementById('climb').checked?1:0,
+		'climbTwo' : document.getElementById('climbTwo').checked?1:0,
+		'climbThree' : document.getElementById('climbThree').checked?1:0,
+		'issues' : document.getElementById('issues').value,
+		'defenseBot' : document.getElementById('defenseBot').checked?1:0,
+		'defenseComments' : document.getElementById('defenseComments').value,
+		'matchComments' : document.getElementById('matchComments').value
+		};  
+		
+		console.log(JSON.stringify(nums)); 
+
 	}
 </script>
 <div class="container row-offcanvas row-offcanvas-left">
 	<div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
-		<div class="row">
-			<div id="matchinfo" style="text-align: center;">	
+			<div class="row" style="text-align: center;">	
 				<div class="col-md-3">
 					Match Number:
 					<input type="text" name="matchNum" id="matchNum" size="8" class="form-control">
@@ -218,19 +219,18 @@ function postwith(to){
 					<button id="Switch" onclick="autotele();" class="btn btn-primary" >Teleop</button>
 				</div>
 			</div>
-		</div>
 		<div id="autoscouting">
 			<a><h2><b><u>Auto Scouting:</u></b></h2></a>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="togglebutton" id="reach">
-						<h4><b>Reached Base Line:</b></h4>
+						<h4><b>Crossed Auto Line:</b></h4>
 						<label>
 							<input id="crossLineA" type="checkbox">
 						</label>
 					</div>
 					<a href="javascript:void(0)" class="btn btn-raised btn-boulder btn-material-teal-600" onclick="clearPath()"><b>CLEAR PATH</b></a>
-						<canvas id="myCanvas" width="300" height="330" style="border:1px solid #d3d3d3;">
+						<canvas id="myCanvas" width="300" height="380" style="border:1px solid #d3d3d3;">
 						<script type="text/javascript">
 								var canvas = document.getElementById('myCanvas');
 								var context = canvas.getContext('2d');
@@ -242,13 +242,13 @@ function postwith(to){
 								var lastCoordinate = {};
 								var imageObj = new Image();
 								  imageObj.onload = function() {
-									context.drawImage(imageObj, 0, 0, 300, 400);
+									context.drawImage(imageObj, 0, 0, 300, 380);
 								  };
-								  imageObj.src = 'pictures/autoPath.png';
+								  imageObj.src = 'images/autoPath.png';
 								  
 								function clearPath(){
 									context.clearRect(0, 0, 300, 330);
-									context.drawImage(imageObj, 0, 0, 300, 400);
+									context.drawImage(imageObj, 0, 0, 300, 380);
 									coordinateList = [];
 									lastCoordinate = {};
 								}
@@ -377,53 +377,44 @@ function postwith(to){
 							</script>
 				</div>
 				<div class="col-md-4">
-				<a><h3><b><u>Gear:</u></b></h3></a>
-					<h4><b>No. of Gears Placed:</b></h4>
-						<button type="button" onClick="decGearsPlacedA()" class="enlargedtext ">-</button>	
-						<a id="gearNumberA" class="enlargedtext">0</a>
-						<button type="button" onClick="incrGearsPlacedA()" class="enlargedtext">+</button>
-					<h4><b>Gear Placement -</b></h4>
-					<select id="gearPositionA" class="form-control">
-						 <option value="Not Attempted">Not Attempted</option>
-						 <option value="left">1</option>
-						 <option value="middle">2</option>
-						 <option value="right">3</option>
-					</select>
-						<img src="pictures/gearPositionPic.png" width="600" height="300">
+				<a><h3><b><u>Scale:</u></b></h3></a>
+					<h4><b>No. of Cubes on Scale:</b></h4>
+						<button type="button" onClick="decCubesScaleA()" class="enlargedtext ">-</button>	
+						<a id="ownScaleA" class="enlargedtext">0</a>
+						<button type="button" onClick="incrCubesScaleA()" class="enlargedtext">+</button>
+						<br>
+						<img src="images/field.png" width="600" height="300">
 				</div>
 				<div class="col-md-4">
-				<a><h3><b><u>Fuel:</u></b></h3></a>
-					<h4><b>Hopper Used -</b></h4>
-					<select id="hopperUsedA" class="form-control">
-						 <option value="Not Attempted">Not Attempted</option>
-						 <option value="nearScorer">A</option>
-						 <option value="nearBoiler">B</option>
-					</select>
-					<div class="togglebutton" id="reach">
-						<h4><b>Ranking Point Achieved:</b></h4>
-						<label>
-						<input id="rankingPointA" type="checkbox">
-						</label>
-					</div>
+				<a><h3><b><u>Switch:</u></b></h3></a>
+					<h4><b>No. of Cubes on Switch:</b></h4>
+						<button type="button" onClick="decCubesSwitchA()" class="enlargedtext ">-</button>	
+						<a id="ownSwitchA" class="enlargedtext">0</a>
+						<button type="button" onClick="incrCubesSwitchA()" class="enlargedtext">+</button>
 				</div>
 			</div>
 		</div>
 		<div id="teleopscouting">
 			<a><h2><b><u>Teleop Scouting:</u></b></h2></a>
 			<div class="row">
-				<div class="col-md-3">
-				<a><h3><b><u>Gear:</u></b></h3></a>
-					<h4><b>Gear Pickup:</b></h4>
-						<select id="gearPickupT" multiple="" class="form-control">
-						  <option value="N/A">Not Able to Get Gears</option>
-						  <option value="feeder station">Feeder Station</option>
-						  <option value="floor">Floor Pickup</option>
-						  <option value="Both">Both</option>
-						</select>
-					<h4><b>No. of Gears Placed:</b></h4>
-						<button type="button" onClick="decGearsPlacedT()" class="enlargedtext ">-</button>	
-						<a id="gearNumberT" class="enlargedtext">0</a>
-						<button type="button" onClick="incrGearsPlacedT()" class="enlargedtext">+</button>
+				<div class="col-md-4">
+					<a><h3><b><u>Cubes:</u></b></h3></a>
+					<h4><b>No. of Cubes on Switch:</b></h4>
+						<button type="button" onClick="decCubesSwitchT()" class="enlargedtext ">-</button>	
+						<a id="ownSwitchT" class="enlargedtext">0</a>
+						<button type="button" onClick="incrCubesSwitchT()" class="enlargedtext">+</button>
+					<h4><b>No. of Cubes on Scale:</b></h4>
+						<button type="button" onClick="decCubesScaleT()" class="enlargedtext ">-</button>	
+						<a id="ownScaleT" class="enlargedtext">0</a>
+						<button type="button" onClick="incrCubesScaleT()" class="enlargedtext">+</button>
+					<h4><b>No. of Cubes on Opp. Switch:</b></h4>
+						<button type="button" onClick="decCubesOppSwitchT()" class="enlargedtext ">-</button>	
+						<a id="oppSwitchT" class="enlargedtext">0</a>
+						<button type="button" onClick="incrCubesOppSwitchT()" class="enlargedtext">+</button>
+					<h4><b>No. of Cubes in Exchange:</b></h4>
+						<button type="button" onClick="decCubesExchangeT()" class="enlargedtext ">-</button>	
+						<a id="exchangeT" class="enlargedtext">0</a>
+						<button type="button" onClick="incrCubesExchangeT()" class="enlargedtext">+</button>
 					<a><h3><b><u>Robot Issues:</u></b></h3></a>
 						<select id="issues" multiple="" class="form-control">
 						  <option value="N/A">None</option>
@@ -432,70 +423,27 @@ function postwith(to){
 						  <option value="fell over">Fell Over</option>
 						</select>
 				</div>
-				<div class="col-md-3">
-				<a><h3><b><u>Fuel:</u></b></h3></a>
-					<h4><b>Fuel Pickup:</b></h4>
-						<select id="fuelPickupT" multiple="" class="form-control">
-							  <option value="N/A">Not Able to Get Fuel</option>
-							  <option value="feeder station">Feeder Station</option>
-							  <option value="floor">Floor Pickup</option>
-							  <option value="hopper">Hopper</option>
-							  <option value="feeder and floor">Feeder & Floor</option>
-							  <option value="feeder and hopper">Feeder & Hopper</option>
-							  <option value="floor and hopper">Floor & Hopper</option>
-							  <option value="all">All 3</option>
-						</select>
-					<h4><b>Goal Scored In -</b></h4>
-					<select id="fuelGoalT" class="form-control">
-						 <option value="Not Attempted">Not Attempted</option>
-						 <option value="High Goal">High Goal</option>
-						 <option value="Low Goal">Low Goal</option>
-						 <option value="Both">Both</option>
-					</select>
-					<h4><b>Fuel Accuracy -</b></h4>
-					<select id="fuelAccuracyT" class="form-control">
-						 <option value="N/A">N/A</option>
-						 <option value="1">1 (< / =60%)</option>
-						 <option value="2">2 (61 - 70%)</option>
-						 <option value="3">3 (71 - 80%)</option>
-						 <option value="4">4 (81 - 90%)</option>
-						 <option value="5">5 (91 - 100%)</option>
-					</select>
-				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 				<br><br>
-				<h4><b>Fuel Speed -</b></h4>
-					<select id="fuelSpeedT" class="form-control">
-						 <option value="N/A">N/A</option>
-						 <option value="1">1 (> / =50 sec)</option>
-						 <option value="2">2 (31 - 40 sec)</option>
-						 <option value="3">3 (21 - 30 sec)</option>
-						 <option value="4">4 (11 - 20 sec)</option>
-						 <option value="5">5 (01 - 10 sec)</option>
-					</select>
-					<h4><b>Hopper Size -</b></h4>
-					<select id="hopperSizeT" class="form-control">
-						 <option value="N/A">N/A</option>
-						 <option value="1">1 (~20 Fuel)</option>
-						 <option value="2">2 (~40 Fuel)</option>
-						 <option value="3">3 (~60 Fuel)</option>
-						 <option value="4">4 (~80 Fuel)</option>
-						 <option value="5">5 (~100 Fuel)</option>
-					</select>
 				<a><h3><b><u>Climb:</u></b></h3></a>
 					<div class="togglebutton" id="reach">
-						<h4><b>Climb?(Only for Full Climb)</b></h4>
+						<h4><b>Successful Single Climb?(Only for Full Climb)</b></h4>
 						<label>
 							<input id="climb" type="checkbox">
 						</label>
 					</div>
-					<h4><b>Climb Final Position -</b></h4>
-					<select id="climbExtent" class="form-control">
-						 <option value="Not Attempted">Not Attempted</option>
-						 <option value="Ready for Takeoff">Ready for Takeoff</option>
-						 <option value="Halfway">Halfway</option>
-						 <option value="Fell off">Fell off</option>
-					</select>
+					<div class="togglebutton" id="reach">
+						<h4><b>Successful Double Climb?</b></h4>
+						<label>
+							<input id="climbTwo" type="checkbox">
+						</label>
+					</div>
+					<div class="togglebutton" id="reach">
+						<h4><b>Successful Triple Climb?</b></h4>
+						<label>
+							<input id="climbThree" type="checkbox">
+						</label>
+					</div>
 				<a><h3><b><u>Defense:</u></b></h3></a>
 					<div class="togglebutton" id="reach">
 						<h4><b>Defense Played?</b></h4>
@@ -504,18 +452,16 @@ function postwith(to){
 						</label>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<br> <br>
 					<div style="padding: 5px; padding-bottom: 10;" >
 					<h4><b><u>Defense Comments: </u></b></h4>
-					<textarea placeholder="hello friend" rows="6" cols="10" id = "defenseComments"  class="form-control"> 
-					</textarea>
+					<textarea placeholder="How well they played defense, Strategy for defense" type="text" id="defenseComments" class="form-control md-textarea" rows="6"></textarea>
 					</div>
 					<br> <br>
 					<div style="padding: 5px; padding-bottom: 10;" >
-					<h4><b><u>Comments: </u></b></h4>
-					<textarea placeholder="hello friend" rows="6" cols="10" id = "matchComments"  class="form-control"> 
-					</textarea>
+					<h4><b><u>Comments / Strategy: </u></b></h4>
+					<textarea placeholder="Please write strategy of the robot or interesting observations of the robot" type="text" id="matchComments" class="form-control md-textarea" rows="6"></textarea>
 					<br>
 					<input type="button" value="Submit Data" class="btn btn-primary" onclick="postwith('');" />
 					</div>
@@ -526,3 +472,4 @@ function postwith(to){
 </div>						
 </body>
 </html>
+<?php include ("footer.php"); ?>

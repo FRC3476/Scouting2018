@@ -5,7 +5,7 @@
         <div class="call-to-action">
             <ul>
               <li class="nav-item active">
-                <a class="nav-link" href="index.php" style="color:Black;">Return to Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php" style="color:Black;"><b><u>Return to Home </u></b><span class="sr-only">(current)</span></a>
             </li>  
             </ul>
         </div>
