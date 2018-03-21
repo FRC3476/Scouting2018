@@ -1,74 +1,65 @@
 <?php include ("header.php"); ?>
 <!-- Image and text -->
-<nav class="navbar navbar-expand-lg navbar-dark orange">
-    <a class="navbar-brand" href="#">
-        <img src="images/Logo.png" height="50" class="d-inline-block align-top" alt="">
+<nav class="navbar navbar-expand-lg navbar-dark orange" role="navigation">
+<a class="navbar-brand" href="#">
+        <img src="images/Logo.png" height="40" class="d-inline-block align-top" alt="">
         
     </a>
-	 <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-	    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <h4><a class="nav-link" href="index.php" style="color:Black;">Scouting 2018</a></h4>
-            </li>
-        </ul>
+	<div class = "container">
+		<!-- Drop down button for small screens -->
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+		<!-- Left justified logo/text -->
+		<div class="navbar-header">
+			<a class="navbar-brand" href="index.php" style="color:Black;">
+				Scouting 2018
+			</a>
+		</div>
+		<!-- What goes under the drop down button/rest of navbar -->
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-left">
 				<li class = "dropdown">
-					<a class="dropdown-toggle" style="color:Black;">Forms</a>
+					<a  class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color:Black;" >Forms<b class="caret"></b></a>
 	                    <ul class="dropdown-menu">
-	                        <li><a class="nav-link" href="matchInput.php" style="color:Black;">Match Form</a></li>
-							<li><a class="nav-link" href="index.php" style="color:Black;">HS Input</a></li>
-							<li><a class="nav-link" href="index.php" style="color:Black;">PS Form</a></li>
-							<li><a class="nav-link" href="index.php" style="color:Black;">Picture Upload</a></li>
-							<li><a class="nav-link" href="index.php" style="color:Black;">Database Op</a></li>		
+	                        <li><a href="matchInput.php" style="color:Black;">Match Form</a></li>
+							<li><a href="headScoutInput.php" style="color:Black;">HS Input</a></li>
+							<li><a href="pitInput.php" style="color:Black;">PS Form</a></li>
+							<li><a href="pictureUpload.php" style="color:Black;">Picture Upload</a></li>
+							<li><a href="databaseOperations.php" style="color:Black;">Database Op</a></li>		
 	                    </ul>
 				</li>
-				<li><a class="nav-link" href="index.php" style="color:Black;">User Registration</a></li>
-				<li><a class="nav-link" href="index.php" style="color:Black;">Team Data</a></li>
-				<li><a class="nav-link" href="index.php" style="color:Black;">Match Data</a></li>
-				<li><a class="nav-link" href="index.php" style="color:Black;">Ranking</a></li>	
-				<li><a class="nav-link" href="index.php" style="color:Black;">Match Output</a></li>
-				<li><a class="nav-link" href="index.php" style="color:Black;">HS Output</a></li>
-				<li><a class="nav-link" href="index.php" style="color:Black;">Team Filter</a></li>	
+				<li><a href="userRegistration.php" style="color:Black;">User Registration</a></li>
+				<li><a href="teamData.php" style="color:Black;">Team Data</a></li>
+				<li><a href="matchData.php" style="color:Black;">Match Data</a></li>
+				<li><a href="teamRanking.php" style="color:Black;">Ranking</a></li>	
+				<li><a href="matchOutput.php" style="color:Black;">Match Output</a></li>
+				<li><a href="headScoutOutput.php" style="color:Black;">HS Output</a></li>
+				<li><a href="teamFilter.php" style="color:Black;">Team Filter</a></li>	
 
 			</ul>
-			</div>
-		
-		<?php
-			if(isset($_SESSION["userKey"])){
-				echo('<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a data-target="#" class="dropdown-toggle-1 nav-link" data-toggle="dropdown">'.$_SESSION["userName"].'<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="javascript:void(0)">Action</a></li>
-								<li class="divider"></li>
-								<li><a href="logout.php">Logout</a></li>
-							</ul>
-						</li>
-					</ul>');
-			}
-			else{
-				echo('<ul class="nav navbar-nav navbar-right">
-						<li class = "nav-item">
-							<a class="nav-link" href = "login.php" >Login</a>
-						</li>
-					</ul>');
-			}
-		?>
-		
-			
-
-        <!-- Search form -->
-        <!--<form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-			
-        </form>-->
-    </div>
-    <!-- Collapsible content -->
+			<ul class="nav navbar-nav navbar-right">
+                    <?php
+                        if(isset($_SESSION["userIDCookie"])){
+                            echo('<li class="dropdown">
+                                <a data-target="#" class="dropdown-toggle" data-toggle="dropdown">'.$_SESSION["userIDCookie"].'<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0)">Action</a></li>
+                                <li class="divider"></li>
+                                <li><a href="logout.php">Logout</a></li>
+                                </ul>
+                                </ul>
+                                </li>');
+								echo(" <script>
+										 $(document).ready(function(){
+											$('.dropdown-toggle').dropdown();
+										});
+									</script>'");
+                        }
+                    ?>
+		</div>
+	</div>
 </nav>

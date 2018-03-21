@@ -207,11 +207,10 @@ include("databaseName.php");
 			while ($row = mysqli_fetch_array($result2)){
 				array_push(	$teamData[7], array($row["user"], $row["ID"], $row["matchNum"], 
 							$row["teamNum"], $row["allianceColor"], $row["autoPath"], 
-							$row["crossLineA"], $row["gearPositionA"], $row["gearNumberA"], 
-							$row["hopperUsedA"], $row["rankingPointA"], $row["gearNumberT"], 
-							$row["gearPickupT"], $row["fuelGoalT"], $row["fuelPickupT"], 
-							$row["fuelAccuracyT"], $row["fuelSpeedT"], $row["hopperSizeT"], 
-							$row["climb"], $row["climbExtent"], $row["issues"], $row["defenseBot"], 
+							$row["crossLineA"], $row["ownSwitchA"], $row["ownScaleA"], 
+							$row["ownSwitchT"], $row["ownScaleT"], $row["oppSwitchT"], 
+							$row["exchangeT"],  $row["climb"], $row["climbTwo"], 
+							$row["climbThree"], $row["issues"], $row["defenseBot"], 
 							$row["defenseComments"], $row["matchComments"]));
 			}	
 		}
@@ -226,31 +225,87 @@ include("databaseName.php");
 		return($teamData);
 	}
 	
-	function getAvgGearA($teamNumber){
+	function getAvgOwnSwitchA($teamNumber){
 		$teamData = getTeamData($teamNumber);
-		$gearCount = 0;
+		$cubeCount = 0;
 		$matchCount  = 0;
 		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			$gearCount = $gearCount + $teamData[7][$i][8];
+			$cubeCount = $cubeCount + $teamData[7][$i][7];
 			$matchCount++;
 		}
-		return($gearCount/$matchCount);
+		return($cubeCount/$matchCount);
 	}
-	function getAvgGearT($teamNumber){
+	function getAvgOwnScaleA($teamNumber){
 		$teamData = getTeamData($teamNumber);
-		$gearCount = 0;
+		$cubeCount = 0;
 		$matchCount  = 0;
 		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			$gearCount = $gearCount + $teamData[7][$i][11];
+			$cubeCount = $cubeCount + $teamData[7][$i][8];
 			$matchCount++;
 		}
-		return ($gearCount/$matchCount);
+		return ($cubeCount/$matchCount);
+	}
+	function getAvgOwnSwitchT($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$cubeCount = 0;
+		$matchCount  = 0;
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$cubeCount = $cubeCount + $teamData[7][$i][9];
+			$matchCount++;
+		}
+		return($cubeCount/$matchCount);
+	}
+	function getAvgOwnScaleT($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$cubeCount = 0;
+		$matchCount  = 0;
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$cubeCount = $cubeCount + $teamData[7][$i][10];
+			$matchCount++;
+		}
+		return ($cubeCount/$matchCount);
+	}
+	function getAvgOppSwitchT($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$cubeCount = 0;
+		$matchCount  = 0;
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$cubeCount = $cubeCount + $teamData[7][$i][11];
+			$matchCount++;
+		}
+		return($cubeCount/$matchCount);
+	}
+	function getAvgExchangeT($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$cubeCount = 0;
+		$matchCount  = 0;
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$cubeCount = $cubeCount + $teamData[7][$i][12];
+			$matchCount++;
+		}
+		return($cubeCount/$matchCount);
 	}
 	function getTotalClimb($teamNumber){
 		$teamData = getTeamData($teamNumber);
 		$climbCount = 0;
 		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			$climbCount = $climbCount + $teamData[7][$i][18];
+			$climbCount = $climbCount + $teamData[7][$i][13];
+		}
+		return ($climbCount);
+	}
+	function getTotalClimbTwo($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$climbCount = 0;
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$climbCount = $climbCount + $teamData[7][$i][14];
+		}
+		return ($climbCount);
+	}
+	function getTotalClimbThree($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$climbCount = 0;
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$climbCount = $climbCount + $teamData[7][$i][15];
 		}
 		return ($climbCount);
 	}
@@ -258,35 +313,85 @@ include("databaseName.php");
 		$teamData = getTeamData($teamNumber);
 		$defenseCount = 0;
 		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			$defenseCount = $defenseCount + $teamData[7][$i][21];
+			$defenseCount = $defenseCount + $teamData[7][$i][17];
 		}
 		return ($defenseCount);
 	}
-	function getGearA($teamNumber){
+	function getSwitchA($teamNumber){
 		$teamData = getTeamData($teamNumber);
 		$matchN = matchNum($teamNumber);
-		$gearGraphA = array();
+		$cubeGraphA = array();
 		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			$gearGraphA[$teamData[7][$i][2]] = $teamData[7][$i][8];
-			//array_push($gearGraphA, $teamData[7][$i][8]);
+			$cubeGraphA[$teamData[7][$i][2]] = $teamData[7][$i][7];
 		}
 		$out = array();
 		for($i = 0; $i != sizeof($matchN); $i++){
-			array_push($out , $gearGraphA[$matchN[$i]]);
+			array_push($out , $cubeGraphA[$matchN[$i]]);
 		}
 		return ($out);
 	}
-	function getGearT($teamNumber){
+	function getScaleA($teamNumber){
 		$teamData = getTeamData($teamNumber);
 		$matchN = matchNum($teamNumber);
-		$gearGraphT = array();
+		$cubeGraphA = array();
 		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			$gearGraphT[$teamData[7][$i][2]] = $teamData[7][$i][11];
-			//array_push($gearGraphT, $teamData[7][$i][11]);
+			$cubeGraphA[$teamData[7][$i][2]] = $teamData[7][$i][8];
 		}
 		$out = array();
 		for($i = 0; $i != sizeof($matchN); $i++){
-			array_push($out , $gearGraphT[$matchN[$i]]);
+			array_push($out , $cubeGraphA[$matchN[$i]]);
+		}
+		return ($out);
+	}
+	function getSwitchT($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$matchN = matchNum($teamNumber);
+		$cubeGraphT = array();
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$cubeGraphT[$teamData[7][$i][2]] = $teamData[7][$i][9];
+		}
+		$out = array();
+		for($i = 0; $i != sizeof($matchN); $i++){
+			array_push($out , $cubeGraphT[$matchN[$i]]);
+		}
+		return ($out);
+	}
+	function getScaleT($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$matchN = matchNum($teamNumber);
+		$cubeGraphT = array();
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$cubeGraphT[$teamData[7][$i][2]] = $teamData[7][$i][10];
+		}
+		$out = array();
+		for($i = 0; $i != sizeof($matchN); $i++){
+			array_push($out , $cubeGraphT[$matchN[$i]]);
+		}
+		return ($out);
+	}
+	function getOppSwitchT($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$matchN = matchNum($teamNumber);
+		$cubeGraphT = array();
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$cubeGraphT[$teamData[7][$i][2]] = $teamData[7][$i][11];
+		}
+		$out = array();
+		for($i = 0; $i != sizeof($matchN); $i++){
+			array_push($out , $cubeGraphT[$matchN[$i]]);
+		}
+		return ($out);
+	}
+	function getExchangeT($teamNumber){
+		$teamData = getTeamData($teamNumber);
+		$matchN = matchNum($teamNumber);
+		$cubeGraphT = array();
+		for($i = 0; $i != sizeof($teamData[7]); $i++){
+			$cubeGraphT[$teamData[7][$i][2]] = $teamData[7][$i][12];
+		}
+		$out = array();
+		for($i = 0; $i != sizeof($matchN); $i++){
+			array_push($out , $cubeGraphT[$matchN[$i]]);
 		}
 		return ($out);
 	}
@@ -303,7 +408,7 @@ include("databaseName.php");
 		$teamData = getTeamData($teamNumber);
 		$defenseComments = array();
 		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			array_push($defenseComments, $teamData[7][$i][22]);
+			array_push($defenseComments, $teamData[7][$i][18]);
 		}
 		return ($defenseComments);
 	}
@@ -311,7 +416,7 @@ include("databaseName.php");
 		$teamData = getTeamData($teamNumber);
 		$matchComments = array();
 		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			array_push($matchComments, $teamData[7][$i][23]);
+			array_push($matchComments, $teamData[7][$i][19]);
 		}
 		return ($matchComments);
 	}
@@ -339,71 +444,5 @@ include("databaseName.php");
 			}
 		}
 		return ($headScoutComments);
-	}
-	function fuelAccuracy($teamNumber){
-		$teamData = getTeamData($teamNumber);
-		$fuelAccuracy = array(0,0,0,0,0);
-		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			if($teamData[7][$i][15] == "1"){
-				$fuelAccuracy[0] +=1;
-			}
-			if($teamData[7][$i][15] == "2"){
-				$fuelAccuracy[1] +=1;
-			}
-			if($teamData[7][$i][15] == "3"){
-				$fuelAccuracy[2] +=1;
-			}
-			if($teamData[7][$i][15] == "4"){
-				$fuelAccuracy[3] +=1;
-			}
-			if($teamData[7][$i][15] == "5"){
-				$fuelAccuracy[4] +=1;
-			}
-		}
-		return($fuelAccuracy);
-	}
-	function fuelSpeed($teamNumber){
-		$teamData = getTeamData($teamNumber);
-		$fuelSpeed = array(0,0,0,0,0);
-		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			if($teamData[7][$i][16] == "1"){
-				$fuelSpeed[0] +=1;
-			}
-			if($teamData[7][$i][16] == "2"){
-				$fuelSpeed[1] +=1;
-			}
-			if($teamData[7][$i][16] == "3"){
-				$fuelSpeed[2] +=1;
-			}
-			if($teamData[7][$i][16] == "4"){
-				$fuelSpeed[3] +=1;
-			}
-			if($teamData[7][$i][16] == "5"){
-				$fuelSpeed[4] +=1;
-			}
-		}
-		return($fuelSpeed);
-	}
-	function hopperSize($teamNumber){
-		$teamData = getTeamData($teamNumber);
-		$hopperSize = array(0,0,0,0,0);
-		for($i = 0; $i != sizeof($teamData[7]); $i++){
-			if($teamData[7][$i][17] == "1"){
-				$hopperSize[0] +=1;
-			}
-			if($teamData[7][$i][17] == "2"){
-				$hopperSize[1] +=1;
-			}
-			if($teamData[7][$i][17] == "3"){
-				$hopperSize[2] +=1;
-			}
-			if($teamData[7][$i][17] == "4"){
-				$hopperSize[3] +=1;
-			}
-			if($teamData[7][$i][17] == "5"){
-				$hopperSize[4] +=1;
-			}
-		}
-		return($hopperSize);
 	}
 ?>

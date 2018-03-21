@@ -1,6 +1,6 @@
 <html>
 <?php session_start();
-include("navbar.php");?>
+include("navBar.php");?>
 <body>
 <script src="externalJS/Chart.js"></script>
 <style>
@@ -38,9 +38,6 @@ var $ = jQuery.noConflict();
 					include("databaseLibrary.php");
 					getTeamData($_GET["team"]);
 					$teamData = getTeamData($teamNumber);
-					$fuelAccuracy = fuelAccuracy($teamNumber);
-					$fuelSpeed = fuelSpeed($teamNumber);
-					$hopperSize = hopperSize($teamNumber);
 					
 				}	
 		?>
@@ -94,134 +91,13 @@ var $ = jQuery.noConflict();
 					  </a>
 					</div>
 				</div>
-				<a><h3><b><u>Fuel Statistics:</u></b></h3></a>
-				<h4><b>Fuel Accuracy -</b></h4>
-				<div id="canvas-holder">
-					<canvas id="chart-area" width="100" height="100"/>
-				</div>
-				<h4><b>Fuel Speed -</b></h4>
-				<div id="canvas-holder2">
-					<canvas id="chart-area2" width="100" height="100"/>
-				</div>
-				<h4><b>Hopper Size -</b></h4>
-				<div id="canvas-holder3">
-					<canvas id="chart-area3" width="100" height="100"/>
-				</div>
-				<script>
-				var doughnutData = [
-				{
-					value: <?php echo($fuelAccuracy[0]);?>,
-					color:"#FF8C00",
-					highlight: "#FF5A5E",
-					label: "(< / =60%)"
-				},
-				{
-					value: <?php echo($fuelAccuracy[1]);?>,
-					color: "#008080",
-					highlight: "#5AD3D1",
-					label: "(61 - 70%)"
-				},
-				{
-					value: <?php echo($fuelAccuracy[2]);?>,
-					color: "#9ACD32",
-					highlight: "#FFC870",
-					label: "(71 - 80%)"
-				},
-				{
-					value: <?php echo($fuelAccuracy[3]);?>,
-					color: "#20B2AA",
-					highlight: "#A8B3C5",
-					label: "(81 - 90%)"
-				},
-				{
-					value: <?php echo($fuelAccuracy[4]);?>,
-					color: "#FFA500",
-					highlight: "#616774",
-					label: "(91 - 100%)"
-				}
-			];
-				
-				var doughnutData2 = [
-				{
-					value: <?php echo($fuelSpeed[0]);?>,
-					color:"#FF8C00",
-					highlight: "#FF5A5E",
-					label: "(> / =09 sec)"
-				},
-				{
-					value: <?php echo($fuelSpeed[1]);?>,
-					color: "#008080",
-					highlight: "#5AD3D1",
-					label: "(07 - 08 sec)"
-				},
-				{
-					value: <?php echo($fuelSpeed[2]);?>,
-					color: "#9ACD32",
-					highlight: "#FFC870",
-					label: "(05 - 06 sec)"
-				},
-				{
-					value: <?php echo($fuelSpeed[3]);?>,
-					color: "#20B2AA",
-					highlight: "#A8B3C5",
-					label: "(03 - 04 sec)"
-				},
-				{
-					value: <?php echo($fuelSpeed[4]);?>,
-					color: "#FFA500",
-					highlight: "#616774",
-					label: "(01 - 02 sec)"
-				}
-			];	
-				var doughnutData3 = [
-				{
-					value: <?php echo($hopperSize[0]);?>,
-					color:"#FF8C00",
-					highlight: "#FF5A5E",
-					label: "(~20 Fuel)"
-				},
-				{
-					value: <?php echo($hopperSize[1]);?>,
-					color: "#008080",
-					highlight: "#5AD3D1",
-					label: "(~40 Fuel)"
-				},
-				{
-					value: <?php echo($hopperSize[2]);?>,
-					color: "#9ACD32",
-					highlight: "#FFC870",
-					label: "(~60 Fuel)"
-				},
-				{
-					value: <?php echo($hopperSize[3]);?>,
-					color: "#20B2AA",
-					highlight: "#A8B3C5",
-					label: "(~80 Fuel)"
-				},
-				{
-					value: <?php echo($hopperSize[4]);?>,
-					color: "#FFA500",
-					highlight: "#616774",
-					label: "(~100 Fuel)"
-				}
-			];
-			
-			window.onload = function(){
-				var ctx = document.getElementById("chart-area").getContext("2d");
-				window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
-				var ctx2 = document.getElementById("chart-area2").getContext("2d");
-				window.myDoughnut = new Chart(ctx2).Doughnut(doughnutData2, {responsive : true});
-				var ctx3 = document.getElementById("chart-area3").getContext("2d");
-				window.myDoughnut = new Chart(ctx3).Doughnut(doughnutData3, {responsive : true});
-				var ctx4 = document.getElementById("myChart").getContext("2d");
-				window.myLine = new Chart(ctx4).Line(lineChartData, {responsive: true});
-			};
-				</script>
-			</div>
-			<div class = "col-md-4">
-				<a><h3><b><u>Gear Statistics:</u></b></h3></a>
-				<button class=" btn btn-material-blue">Auto Gears</button>
-				<button class=" btn btn-material-green">Teleop Gears</button>
+				<a><h3><b><u>Cube Statistics:</u></b></h3></a>
+				<button class=" btn btn-material-red">Auto Cubes - Switch</button>
+				<button class=" btn btn-material-orange">Auto Cubes - Scale</button>
+				<button class=" btn btn-material-yellow">Teleop Cubes - Switch</button>
+				<button class=" btn btn-material-green">Teleop Cubes - Scale</button>
+				<button class=" btn btn-material-blue">Teleop Cubes - Opp Switch</button>
+				<button class=" btn btn-material-purple">Teleop Cubes - Exchange</button>
 				<canvas id="myChart" width="300" height="250"></canvas>
 				<script>
 				var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
@@ -229,39 +105,96 @@ var $ = jQuery.noConflict();
 				labels : <?php echo(json_encode(matchNum($teamNumber)));?>,
 				datasets : [
 					{
-						label: "Auto Gears",
+						label: "Auto Switch Cubes",
 						fillColor : "rgba(220,220,220,0.1)",
-						strokeColor : "#03a9f4",
+						strokeColor : "#ff0000",
 						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#03a9f4",
+						pointStrokeColor : "#ff0000",
 						pointHighlightFill : "#fff",
 						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : <?php echo(json_encode(getGearA($teamNumber))); ?>
+						data : <?php echo(json_encode(getSwitchA($teamNumber))); ?>
 					},
 					{
-						label: "Teleop Gears",
+						label: "Auto Scale Cubes",
 						fillColor : "rgba(220,220,220,0.1)",
-						strokeColor : "#0f9d58",
+						strokeColor : "#ffa500",
 						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#0f9d58",
+						pointStrokeColor : "#ffa500",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : <?php echo(json_encode(getScaleA($teamNumber))); ?>
+					},
+					{
+						label: "Teleop Switch Cubes",
+						fillColor : "rgba(220,220,220,0.1)",
+						strokeColor : "#ffff00",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#ffff00",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : <?php echo(json_encode(getSwitchT($teamNumber))); ?>
+					},
+					{
+						label: "Teleop Scale Cubes",
+						fillColor : "rgba(220,220,220,0.1)",
+						strokeColor : "#00b300",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#00b300",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : <?php echo(json_encode(getScaleT($teamNumber))); ?>
+					},
+					{
+						label: "Opp Switch Cubes",
+						fillColor : "rgba(220,220,220,0.1)",
+						strokeColor : "#3385ff",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#3385ff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : <?php echo(json_encode(getOppSwitchT($teamNumber))); ?>
+					},
+					{
+						label: "Exchange Cubes",
+						fillColor : "rgba(220,220,220,0.1)",
+						strokeColor : "#990099",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#990099",
 						pointHighlightFill : "#fff",
 						pointHighlightStroke : "rgba(151,187,205,1)",
-						data : <?php echo(json_encode(getGearT($teamNumber))); ?>
+						data : <?php echo(json_encode(getExchangeT($teamNumber))); ?>
 					}
 				]
 			}
 				</script>
-				<br><br>
+			</div>
+			<div class = "col-md-4">
 				<div class="table-responsive">
 					<table class="table">
 					<tbody>
 						<tr class="info">
-							<td>Average Gears in Auto</td>
-							<td><?php echo(getAvgGearA($teamNumber)); ?></td> 
+							<td>Average Switch Cubes in Auto</td>
+							<td><?php echo(getAvgSwitchA($teamNumber)); ?></td> 
 					  </tr>
 					  <tr class="success">
-							<td>Average Gears in Teleop</td>
-							<td><?php echo(getAvgGearT($teamNumber)); ?></td>
+							<td>Average Scale Cubes in Auto</td>
+							<td><?php echo(getAvgScaleA($teamNumber)); ?></td>
+					  </tr>
+					  <tr class="danger">
+							<td>Average Switch Cubes in Teleop</td>
+							<td><?php echo(getAvgSwitchT($teamNumber)); ?></td> 
+					  </tr>
+					  <tr class="info">
+							<td>verage Scale Cubes in Teleop</td>
+							<td><?php echo(getAvgScaleT($teamNumber)); ?></td>
+					  </tr>
+					  <tr class="success">
+							<td>Average Opp Switch Cubes in Teleop</td>
+							<td><?php echo(getAvgOppSwitchT($teamNumber)); ?></td> 
+					  </tr>
+					  <tr class="danger">
+							<td>Average Exchange Cubes in Teleop</td>
+							<td><?php echo(getAvgExchangeT($teamNumber)); ?></td>
 					  </tr>
 					</tbody>
 					</table>
@@ -271,7 +204,7 @@ var $ = jQuery.noConflict();
 					<table class="table">
 					<tbody>
 						<tr class="success">
-							<td>Match Comments</td>
+							<td>Match Strategy Comments</td>
 							<td><?php $matchComments = matchComments($teamNumber); 
 										for($i = 0; $i!= sizeof($teamData[7]); $i++){
 											echo("$matchComments[$i].").PHP_EOL;
@@ -348,7 +281,7 @@ var $ = jQuery.noConflict();
 						  imageObj.onload = function() {
 							makeCanvasReady();
 						  };
-						  imageObj.src = 'pictures/autoPath.png';
+						  imageObj.src = 'images/autoPath.png';
 						  
 						function makeCanvasReady(){
 							context.clearRect(0, 0, 300, 330);
@@ -401,11 +334,11 @@ var $ = jQuery.noConflict();
 							<td>Total Single Climbs</td>
 							<td><?php echo(getTotalClimb($teamNumber)); ?></td> 
 					  </tr>
-					  <tr class="danger">
+					  <tr class="info">
 							<td>Total Double Climbs</td>
 							<td><?php echo(getTotalClimb($teamNumber)); ?></td> 
 					  </tr>
-					  <tr class="danger">
+					  <tr class="success">
 							<td>Total Triple Climbs</td>
 							<td><?php echo(getTotalClimb($teamNumber)); ?></td> 
 					  </tr>
@@ -429,3 +362,4 @@ var $ = jQuery.noConflict();
 </div>
 </body>
 </html>
+<?php include("footer.php"); ?>

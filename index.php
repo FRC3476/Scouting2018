@@ -57,11 +57,11 @@ include('navBar.php');
                 </div>
 
                 <div class="col-lg-3 mb-r">
-					<a href="#" class="btn btn-warning">Pit Scout Form</a>
+					<a href="pitInput.php" class="btn btn-warning">Pit Scout Form</a>
                 </div>
 
                 <div class="col-lg-3 mb-r">
-					<a href="#" class="btn btn-warning">Head Scout Form</a>
+					<a href="headScoutInput.php" class="btn btn-warning">Head Scout Form</a>
                 </div>
 				
 				<div class="col-lg-3 mb-r">
