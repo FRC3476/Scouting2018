@@ -6,21 +6,24 @@ include("header.php")?>
 <body>
 <?php include("navBar.php")?>
 <?php
+	function filter($str){
+		return filter_var($str, FILTER_SANITIZE_STRING);
+	}
 	if(isset($_POST['matchNum'])){
 		include("databaseLibrary.php");
-		$matchNum = mysql_real_escape_string($_POST['matchNum']);
-		$team1 = mysql_real_escape_string($_POST['team1']);
-		$team2 = mysql_real_escape_string($_POST['team2']);
-		$team3 = mysql_real_escape_string($_POST['team3']);
-		$team4 = mysql_real_escape_string($_POST['team4']);
-		$team5 = mysql_real_escape_string($_POST['team5']);
-		$team6 = mysql_real_escape_string($_POST['team6']);
-		$strategy1 = mysql_real_escape_string($_POST['strategy1']);
-		$strategy2 = mysql_real_escape_string($_POST['strategy2']);
-		$strategy3 = mysql_real_escape_string($_POST['strategy3']);
-		$strategy4 = mysql_real_escape_string($_POST['strategy4']);
-		$strategy5 = mysql_real_escape_string($_POST['strategy5']);
-		$strategy6 = mysql_real_escape_string($_POST['strategy6']);
+		$matchNum = filter($_POST['matchNum']);
+		$team1 = filter($_POST['team1']);
+		$team2 = filter($_POST['team2']);
+		$team3 = filter($_POST['team3']);
+		$team4 = filter($_POST['team4']);
+		$team5 = filter($_POST['team5']);
+		$team6 = filter($_POST['team6']);
+		$strategy1 = filter($_POST['strategy1']);
+		$strategy2 = filter($_POST['strategy2']);
+		$strategy3 = filter($_POST['strategy3']);
+		$strategy4 = filter($_POST['strategy4']);
+		$strategy5 = filter($_POST['strategy5']);
+		$strategy6 = filter($_POST['strategy6']);
 		
 		headScoutInput($matchNum,
 						$team1,
@@ -274,7 +277,7 @@ function postwith(to){
 		document.getElementById('team2').value,
 		document.getElementById('team3').value,
 		document.getElementById('team4').value,
-		document.getElementById('team5').value,,
+		document.getElementById('team5').value,
 		document.getElementById('team6').value,
 		document.getElementById('strategy1').value,
 		document.getElementById('strategy2').value,

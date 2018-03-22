@@ -2,7 +2,7 @@
 <?php session_start();
 include("navBar.php");?>
 <body>
-<script src="externalJS/Chart.js"></script>
+<script src="js/Chart.js"></script>
 <style>
 	body{
 		padding: 0;
@@ -36,7 +36,7 @@ var $ = jQuery.noConflict();
 					$teamNumber = $_GET["team"];
 					include("databaseName.php");
 					include("databaseLibrary.php");
-					getTeamData($_GET["team"]);
+					//getTeamData($_GET["team"]);
 					$teamData = getTeamData($teamNumber);
 					
 				}	
@@ -98,7 +98,7 @@ var $ = jQuery.noConflict();
 				<button class=" btn btn-material-green">Teleop Cubes - Scale</button>
 				<button class=" btn btn-material-blue">Teleop Cubes - Opp Switch</button>
 				<button class=" btn btn-material-purple">Teleop Cubes - Exchange</button>
-				<canvas id="myChart" width="300" height="250"></canvas>
+				<canvas id="dataChart" width="300" height="250"></canvas>
 				<script>
 				var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 				var lineChartData = {
@@ -174,19 +174,19 @@ var $ = jQuery.noConflict();
 					<tbody>
 						<tr class="info">
 							<td>Average Switch Cubes in Auto</td>
-							<td><?php echo(getAvgSwitchA($teamNumber)); ?></td> 
+							<td><?php echo(getAvgOwnSwitchA($teamNumber)); ?></td> 
 					  </tr>
 					  <tr class="success">
 							<td>Average Scale Cubes in Auto</td>
-							<td><?php echo(getAvgScaleA($teamNumber)); ?></td>
+							<td><?php echo(getAvgOwnScaleA($teamNumber)); ?></td>
 					  </tr>
 					  <tr class="danger">
 							<td>Average Switch Cubes in Teleop</td>
-							<td><?php echo(getAvgSwitchT($teamNumber)); ?></td> 
+							<td><?php echo(getAvgOwnSwitchT($teamNumber)); ?></td> 
 					  </tr>
 					  <tr class="info">
 							<td>verage Scale Cubes in Teleop</td>
-							<td><?php echo(getAvgScaleT($teamNumber)); ?></td>
+							<td><?php echo(getAvgOwnScaleT($teamNumber)); ?></td>
 					  </tr>
 					  <tr class="success">
 							<td>Average Opp Switch Cubes in Teleop</td>
@@ -205,23 +205,23 @@ var $ = jQuery.noConflict();
 					<tbody>
 						<tr class="success">
 							<td>Match Strategy Comments</td>
-							<td><?php $matchComments = matchComments($teamNumber); 
-										for($i = 0; $i!= sizeof($teamData[7]); $i++){
-											echo("$matchComments[$i].").PHP_EOL;
+							<td><?php $mc = matchComments($teamNumber); 
+										for($i = 0; $i!= sizeof($mc); $i++){
+											echo("$mc[$i].").PHP_EOL;
 										}?></td>
 					  </tr>
 					  <tr class="info">
 							<td>Defense Comments</td>
-							<td><?php $defenseComments = defenseComments($teamNumber); 
-										for($i = 0; $i!= sizeof($teamData[7]); $i++){
-											echo("$defenseComments[$i].").PHP_EOL;											
+							<td><?php $dc = defenseComments($teamNumber); 
+										for($i = 0; $i!= sizeof($dc); $i++){
+											echo("$dc[$i].").PHP_EOL;											
 										}?></td>
 					  </tr>
 					  <tr class="danger">
 							<td>Head Scout Comments</td>
-							<td><?php $headScoutComments = headScoutComments($teamNumber); 
-										for($i = 0; $i!= sizeof($teamData[8]); $i++){
-											echo("$headScoutComments[$i].").PHP_EOL;											
+							<td><?php $hc = headScoutComments($teamNumber); 
+										for($i = 0; $i!= sizeof($hc); $i++){
+											echo("$hc[$i].").PHP_EOL;											
 										}?></td>
 					  </tr>
 					</tbody>
@@ -280,6 +280,8 @@ var $ = jQuery.noConflict();
 						?>
 						  imageObj.onload = function() {
 							makeCanvasReady();
+							var ctx = document.getElementById("dataChart").getContext("2d");
+							window.myLine = new Chart(ctx).Line(lineChartData, {responsive: true});
 						  };
 						  imageObj.src = 'images/autoPath.png';
 						  
@@ -336,16 +338,16 @@ var $ = jQuery.noConflict();
 					  </tr>
 					  <tr class="info">
 							<td>Total Double Climbs</td>
-							<td><?php echo(getTotalClimb($teamNumber)); ?></td> 
+							<td><?php echo(getTotalClimbTwo($teamNumber)); ?></td> 
 					  </tr>
 					  <tr class="success">
 							<td>Total Triple Climbs</td>
-							<td><?php echo(getTotalClimb($teamNumber)); ?></td> 
+							<td><?php echo(getTotalClimbThree($teamNumber)); ?></td> 
 					  </tr>
 					</tbody>
 					</table>
 				</div>
-				<a><h3><b><u>Defense Statistics:</u></b></h3></a>
+				<a><h3><b><u>D Statistics:</u></b></h3></a>
 				<div class="table-responsive">
 					<table class="table">
 					<tbody>

@@ -15,22 +15,12 @@
 <h1>Head Scout Raw Data</h1>
 
 <?php
-       include("databaseName.php");
-       
-       $con= mysql_connect($servername, $username, $password, $dbname); 
-       if (!$con){
-                  die('Could not connect: ' . mysql_error());
-       }
-       mysql_select_db($dbname, $con);
-       $result = mysql_query('select * from '.$headScoutTable.'');
-	   
-       if (!$result){
-                   die('Query failed: ' . mysql_error());
-       }
+       include("databaseLibrary.php");
+       $result = getAllHeadScoutData();
         $i=0;
        
        echo('<div style="border:1px solid black;overflow-y:hidden;overflow-x:scroll;"><table  class="sortable table table-hover" id="RawData" border="1">');
-       while ($row = mysql_fetch_array($result)){
+       foreach ($result as $row_key => $row){
                if($i==0){
                        echo("<tr>");
                        foreach ($row as $key => $value){

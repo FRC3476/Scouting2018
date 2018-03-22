@@ -15,26 +15,14 @@ include("header.php");
 <h1>Match Scout Raw Data</h1>
 
 <?php
-       include("databaseName.php");
-       
-       $con= mysql_connect($servername, $username, $password, $dbname); 
-       if (!$con){
-                  die('Could not connect: ' . mysql_error());
-       }
-       mysql_select_db($dbname, $con);
-       $result = mysql_query('select * from '.$matchScoutTable.'');
-	   
-       if (!$result){
-                   die('Query failed: ' . mysql_error());
-       }
-        $i=0;
-       
+       include("databaseLibrary.php");
+       $result = getAllMatchData();
        echo('<div style="border:1px solid black;overflow-y:hidden;overflow-x:scroll;"><table  class="sortable table table-hover" id="RawData" border="1">');
-       while ($row = mysql_fetch_array($result)){
+       foreach ($result as $row_key => $row){
                if($i==0){
                        echo("<tr>");
                        foreach ($row as $key => $value){
-                                    if(!is_numeric($key)){
+                                    if(!is_numeric($key) && $key != "autoPath"){
                                        echo("<td>".$key."</td>");
                                }
                        }
@@ -43,7 +31,7 @@ include("header.php");
                }
                echo("<tr>");        
                     foreach ($row as $key => $value){
-                            if(!is_numeric($key)){
+                            if(!is_numeric($key) && $key != "autoPath"){
                                     if($key == "teamNum"){
                                             $value= '<a href="teamData.php?team='.$value.'">'.$value.'</a>';
  }

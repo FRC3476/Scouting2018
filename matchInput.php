@@ -1,51 +1,8 @@
 <html>
 <?php 
 include("navBar.php");
-if( isset( $_POST['matchNum'] ) ) {
-	include("databaseLibrary.php");
-	 $user = ($_SESSION['userIDCookie']);
-	 $matchNum = filter_var($_POST['matchNum'], FILTER_SANITIZE_STRING);  
-	 $teamNum = filter_var($_POST['teamNum'], FILTER_SANITIZE_STRING);  
-	 $ID = $matchNum."-".$teamNum;
-	 $allianceColor = filter_var($_POST['allianceColor'], FILTER_SANITIZE_STRING); 
-	 $autoPath = filter_var($_POST['autoPath'], FILTER_SANITIZE_STRING);  
-	 $crossLineA = filter_var($_POST['crossLineA'], FILTER_SANITIZE_STRING);  
-	 $ownSwitchA = filter_var($_POST['ownSwitchA'], FILTER_SANITIZE_STRING); 
-	 $ownScaleA = filter_var($_POST['ownScaleA'], FILTER_SANITIZE_STRING); 
-	 $ownSwitchT = filter_var($_POST['ownSwitchT'], FILTER_SANITIZE_STRING); 
-	 $ownScaleT = filter_var($_POST['ownScaleT'], FILTER_SANITIZE_STRING); 
-	 $oppSwitchT = filter_var($_POST['oppSwitchT'], FILTER_SANITIZE_STRING); 
-	 $exchangeT = filter_var($_POST['exchangeT'], FILTER_SANITIZE_STRING); 
-	 $climb = filter_var($_POST['climb'], FILTER_SANITIZE_STRING); 
-	 $climbTwo = filter_var($_POST['climbTwo'], FILTER_SANITIZE_STRING); 
-	 $climbThree = filter_var($_POST['climbThree'], FILTER_SANITIZE_STRING); 
-	 $issues = filter_var($_POST['issues'], FILTER_SANITIZE_STRING);  
-	 $defenseBot = filter_var($_POST['defenseBot'], FILTER_SANITIZE_STRING);  
-	 $defenseComments = filter_var($_POST['defenseComments'], FILTER_SANITIZE_STRING);  
-	 $matchComments = filter_var($_POST['matchComments'], FILTER_SANITIZE_STRING);  
-	 matchInput( $user,
-				 $ID,
-				 $matchNum,
-				 $teamNum,
-				 $allianceColor,
-				 $autoPath,
-				 $crossLineA,
-				 $ownSwitchA,
-				 $ownScaleA,
-				 $ownSwitchT,
-				 $ownScaleT,
-				 $oppSwitchT,
-				 $exchangeT,
-				 $climb,
-				 $climbTwo,
-				 $climbThree,
-				 $issues,
-				 $defenseBot,
-				 $defenseComments,
-				 $matchComments);
- }
-	 
 	?>
+<script src="Orange-Rind/js/orangePersist.js"></script>
 <body>
 <script>
 var increment = 1;
@@ -58,9 +15,7 @@ var ownSwitchT = 0;
 var ownScaleT = 0;
 var oppSwitchT = 0; 
 var exchangeT = 0; 
-$( document ).ready(function() {
-    $.material.init();
-});
+
 function incrCubesSwitchA(){
 	ownSwitchA = ownSwitchA + increment;
 	document.getElementById("ownSwitchA").innerHTML=ownSwitchA;
@@ -160,11 +115,9 @@ function autotele(){
 </script>
 <script>
 function postwith(to){
+		orangePersist.initializeApp();
+
 		
-		var myForm = document.createElement("form");
-		myForm.method="post";
-		myForm.action = to;
-	
 		var nums = {
 		'matchNum' : document.getElementById('matchNum').value,
 		'teamNum' : document.getElementById('teamNum').value,
@@ -185,9 +138,12 @@ function postwith(to){
 		'defenseComments' : document.getElementById('defenseComments').value,
 		'matchComments' : document.getElementById('matchComments').value
 		};  
-		
-		console.log(JSON.stringify(nums)); 
-
+		var id = document.getElementById('matchNum').value + "-" + document.getElementById('teamNum').value; 
+		console.log(JSON.stringify(nums));
+		orangePersist.collection("ocr").doc(id).set(nums);
+		$.post( "dataHandler.php", nums).done(function( data ) {
+			console.log(data);
+		});
 	}
 </script>
 <div class="container row-offcanvas row-offcanvas-left">
@@ -204,15 +160,8 @@ function postwith(to){
 				<div class="col-md-3">
 					Alliance Color:
 					<select id="allianceColor" class="form-control">
-						<?php   if($_SESSION['allianceColor'] == "blue"){
-									echo("<option value='blue'>Blue</option>
-										  <option value='red'>Red</option>");
-								}
-							    else{
-									echo("<option value='red'>Red</option>
-										  <option value='blue'>Blue</option>");
-								}
-						?>
+						<option value='blue'>Blue</option>
+						<option value='red'>Red</option>
 					</select>
 				</div>
 				<div class="col-md-3">

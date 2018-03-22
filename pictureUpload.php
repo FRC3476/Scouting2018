@@ -30,4 +30,6 @@
 				<input id="PitScouting" type="submit" class="btn btn-primary" value="Submit Data" onclick="" >
 			</form>
 			</div>
+	</div>
+</div>
 <?php include("footer.php"); ?>
