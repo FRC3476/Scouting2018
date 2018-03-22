@@ -180,8 +180,8 @@ include("databaseName.php");
 	//Output- queryString and "Success" statement, data put in columns.
 	function pitScoutInput($teamNum, $teamName, $weight, $height, $numBatteries,$chargedBatteries, $driveTrain, $pitComments){
 		global $pitScoutTable;
-		$queryString = "REPLACE INTO `".$pitScoutTable."`(`teamNumber`, `teamName`, `weight`, `height`, `numBatteries`,`chargedBatteries`, `driveTrain`, `pitComments`)
-				VALUES (".$teamNum.', "'.$teamName.'", '.$weight.", ".$height.", ".$numBatteries.", ".$chargedBatteries.', "'.$driveTrain.'", "'.$pitComments.'")';
+		$queryString = "REPLACE INTO `".$pitScoutTable.'`(`teamNumber`, `teamName`, `weight`, `height`, `numBatteries`,`chargedBatteries`, `driveTrain`, `pitComments`)
+				VALUES ("'.$teamNum.'", "'.$teamName.'", "'.$weight.'", "'.$height.'", "'.$numBatteries.'", "'.$chargedBatteries.'", "'.$driveTrain.'", "'.$pitComments.'")';
 		$queryOutput = runQuery($queryString);	
 		if ($queryOutput === TRUE) {
 			return "Success";
