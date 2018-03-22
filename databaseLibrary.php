@@ -41,7 +41,7 @@ include("databaseName.php");
 		try{
 			return $statement->fetchAll();
 		}
-		catch(Exception e){
+		catch(Exception $e){
 			return;
 		}
 		// Check connection
