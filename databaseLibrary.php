@@ -37,7 +37,13 @@ include("databaseName.php");
 		if(!$statement->execute()){
 			die("Failed!" );
 		}
-		return $statement->fetchAll();
+		
+		try{
+			return $statement->fetchAll();
+		}
+		catch(Exception e){
+			return;
+		}
 		// Check connection
 		/*if ($conn->connect_error) {
 			//Try to create tables
