@@ -2,7 +2,7 @@
 include("matchInput.php");
 if( isset( $_POST['matchNum'] ) ) {
 include("databaseLibrary.php");
- $user = ($_SESSION['userIDCookie']);
+ $user = filter_var($_POST['userName'], FILTER_SANITIZE_STRING);//($_SESSION['userIDCookie']);
  $matchNum = filter_var($_POST['matchNum'], FILTER_SANITIZE_STRING);  
  $teamNum = filter_var($_POST['teamNum'], FILTER_SANITIZE_STRING);  
  $ID = $matchNum."-".$teamNum;

@@ -115,10 +115,11 @@ function autotele(){
 </script>
 <script>
 function postwith(to){
-		orangePersist.initializeApp();
+		
 
 		
 		var nums = {
+		'userName' : document.getElementById('userName').value,
 		'matchNum' : document.getElementById('matchNum').value,
 		'teamNum' : document.getElementById('teamNum').value,
 		'allianceColor' : document.getElementById('allianceColor').value,
@@ -140,20 +141,24 @@ function postwith(to){
 		};  
 		var id = document.getElementById('matchNum').value + "-" + document.getElementById('teamNum').value; 
 		console.log(JSON.stringify(nums));
-		orangePersist.collection("ocr").doc(id).set(nums);
+		orangePersist.collection("avr").doc(id).set(nums);
 		$.post( "dataHandler.php", nums).done(function( data ) {
-			console.log(data);
+			
 		});
 	}
 </script>
 <div class="container row-offcanvas row-offcanvas-left">
 	<div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 			<div class="row" style="text-align: center;">	
-				<div class="col-md-3">
+				<div class="col-md-2">
+					User:
+					<input type="text" name="userName" onKeyUp="saveUserName()" id="userName" size="8" class="form-control">
+				</div>
+				<div class="col-md-2">
 					Match Number:
 					<input type="text" name="matchNum" id="matchNum" size="8" class="form-control">
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					Team Number:
 					<input type= "text" name="teamNum"  id="teamNum" size="8" class="form-control">
 				</div>
@@ -194,6 +199,17 @@ function postwith(to){
 									context.drawImage(imageObj, 0, 0, 300, 380);
 								  };
 								  imageObj.src = 'images/autoPath.png';
+								  
+								$(document).ready(function(){
+									orangePersist.initializeApp();
+									console.log("GETTING USERNAME");
+									$("#userName").val(localStorage.getItem("userName"));
+								});
+								  
+								function saveUserName(){
+									console.log("SETTING USERNAME");
+									localStorage.setItem("userName", $("#userName").val());
+								}
 								  
 								function clearPath(){
 									context.clearRect(0, 0, 300, 330);
@@ -412,7 +428,7 @@ function postwith(to){
 					<h4><b><u>Comments / Strategy: </u></b></h4>
 					<textarea placeholder="Please write strategy of the robot or interesting observations of the robot" type="text" id="matchComments" class="form-control md-textarea" rows="6"></textarea>
 					<br>
-					<input type="button" value="Submit Data" class="btn btn-primary" onclick="postwith('');" />
+					<input type="button" value="Submit Data" id="submitButton" class="btn btn-primary" onclick="postwith('');" />
 					</div>
 				</div>
 			</div>
